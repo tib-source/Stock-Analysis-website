@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<style type="text/css">
+	body{
+		background: #E3B07F;
+	}
+	.row{
+		width:700px;
+		margin:auto;
+		padding-top: 10px;
+	}
+	h1{
+		font-size:150px;
+		margin-top: 200px;
+		text-align: center; 
+		}
+	#meow{
+		border: 1px solid;
+		margin-top:10px;
+		margin-bottom: 30px;	
+		margin-left:45%;
+	}
+	p{
+		font-size: 20px;
+		margin-top: 20px;
+	}
+	body {
+	  margin: 0;
+	}
+
+	thead{
+		margin-left: -20px;
+	}
+
+	#wrapper {
+	  display: grid;
+	  grid-template-columns: repeat(3, 1fr);
+	  grid-auto-rows: minmax(200px, auto);
+	}
+
+
+</style>
+
+
+
+
+<h1 >Crypto Analysis</h1>
+<p class="text-center"> Write the tickers of three companies you want to analyse </p>
+<form method="POST">
+	{% csrf_token %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm " id>
+	<input type="text" name="crypto1" placeholder="Ticker-Name">
+    </div>
+    <div class="col-sm" >
+	<input type="text" name="crypto2" placeholder="Ticker-Name">
+    </div>   
+     <div class="col-sm" >
+	<input type="text" name="crypto3" placeholder="Ticker-Name">
+    </div>
+  </div>
+    <button id="meow" type="submit" class="btn btn-primary">Analyse</button>
+</div>
+</form>
+
+
+{% if form.non_field_errors %}
+<div class="alert alert-warning	" role="alert">
+	<p>{{ form.non_field_errors}}</p>
+</div>	
+{% endif %}
+
+{% if api %}
+
+<div id="wrapper">
+	<!-- first row of the screen	 -->
+	<div class="splittable">
+		<h3>{{api.get_name.form.crypto1}}</h3>
+
+		<div class="info">
+			<p>Volatility for chosen time : {{api.volatility.0.0}}</p>
+			<p>Mean close price: {{api.volatility.0.1}}</p>
+			<img src="../../assets/fig2">
+		</div>
+		{% include "/snippets/table1.html" %}
+	</div>
+
+
+	<!-- second row  -->
+	<div class="splittable">
+		<h3>{{api.name.1}}</h3>
+		<div class="info">
+			<p>Volatility for chosen time : {{api.volatility.1.0}}</p>
+			<p>Mean close price: {{api.volatility.1.1}}</p>
+			<img src="../../assets/fig2">
+
+		</div>
+		<h3>where table</h3>
+		{% include "/snippets/table1.html" %}
+	</div>
+
+
+	<!-- third row -->
+	<div class="splittable">
+		<h3>{{api.name.2}}</h3>
+
+		<div class="info">
+			<p>Volatility for chosen time : {{api.volatility.2.0}}</p>
+			<p>Mean close price: {{api.volatility.2.1}}</p>
+			<img src="../../assets/fig2">
+		</div>
+		{% include "/snippets/table1.html" %}
+	</div>
+
+</div>
+
+{% endif %}
+
+
+
+
+{% endblock content%}

@@ -1,0 +1,38 @@
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.1/chart.min.js"></script>
+
+<canvas id="chart" width="400", height="400"></canvas>
+<script>
+
+var endpoint = "/api/data"
+var defaultData = []
+var labels = data.labels.split
+$.ajax({
+	method:"GET",
+	url: endpoint,
+	success: function(data){
+		labels = data.labels
+		defaultData = data.default
+		var ctx = document.getElementById("myChart"):
+		var myChart = new Chart(ctx, {
+			type: "line",
+			data: {
+				labels: labels,
+				datasets: [{
+					labels: "Stock Price"
+					data: defaultData
+				}]
+			}
+	})
+	},
+	error: function(error_data){
+		console.log("Error")
+		console.log(error_data)
+	} 
+})
+
+
+</script>
+
