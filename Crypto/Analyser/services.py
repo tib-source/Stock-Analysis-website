@@ -14,8 +14,10 @@ class Analysis():
 		""" takes in a form object from the home page and does some analysis lol"""
 		self.ticker		= tickers 
 		self.historical	= list(map(self.get_historical , self.ticker))
+		self.label 		= self.historical[1]["Date"]
 		self.volatility = list(map(self.volat, self.historical))
-		self.DataFrame	= list(map(self.dicticy , self.historical))
+		self.Data		= [x["Adj Close"] for x in self.historical]
+		self.max 		= list(map(max, self.Data))
 		self.name 		= list(map(self.get_name , self.ticker))
 		#self.graphs 	= list(map(self.graph , self.historical))
 
@@ -32,7 +34,6 @@ class Analysis():
 		file = StringIO(response.text)
 		response.close()
 		df= pd.read_csv(file, sep=",")
-		df.Date = pd.to_datetime(df.Date)
 		df.set_index("Date")
 		return df
 	def dicticy(self,df):
@@ -63,4 +64,4 @@ class Analysis():
 		df: data frame object
 		_number: name by which the produced png file will be saved as 
 		"""
-		mpf.plot(data, type="candle", volume=True, tight_layout=True, figratio = (20,12), title="Current Stock Price")
+		mpf.plot(df, type="candle", volume=True, tight_layout=True, figratio = (20,12), title="Current Stock Price")

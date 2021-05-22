@@ -29,8 +29,6 @@ def home_view(request):
 			context = {
 				"api" : api
 				}
-			return JsonResponse(api.DataFrame[0])
-
 		else:
 			context["form"] = form
 	else:

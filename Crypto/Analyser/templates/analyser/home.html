@@ -52,13 +52,13 @@
 <div class="container">
   <div class="row">
     <div class="col-sm " id>
-	<input type="text" name="crypto1" placeholder="Ticker-Name">
+	<input type="text" name="crypto1" placeholder="Ticker-Name" value="AAPL">
     </div>
     <div class="col-sm" >
-	<input type="text" name="crypto2" placeholder="Ticker-Name">
+	<input type="text" name="crypto2" placeholder="Ticker-Name" value="AAPL">
     </div>   
      <div class="col-sm" >
-	<input type="text" name="crypto3" placeholder="Ticker-Name">
+	<input type="text" name="crypto3" placeholder="Ticker-Name" value="AAPL">
     </div>
   </div>
     <button id="meow" type="submit" class="btn btn-primary">Analyse</button>
@@ -77,14 +77,14 @@
 <div id="wrapper">
 	<!-- first row of the screen	 -->
 	<div class="splittable">
-		<h3>{{api.get_name.form.crypto1}}</h3>
+		<h3>{{api.name.0}}</h3>
 
 		<div class="info">
 			<p>Volatility for chosen time : {{api.volatility.0.0}}</p>
 			<p>Mean close price: {{api.volatility.0.1}}</p>
-			<img src="../../assets/fig2">
+			
 		</div>
-		{% include "/snippets/table1.html" %}
+		{% include "analyser/snippets/table.html" with color='rgba(54, 162, 235, 1)' n=0  Data=api.Data.0 name=api.name.0	 %} 
 	</div>
 
 
@@ -94,11 +94,10 @@
 		<div class="info">
 			<p>Volatility for chosen time : {{api.volatility.1.0}}</p>
 			<p>Mean close price: {{api.volatility.1.1}}</p>
-			<img src="../../assets/fig2">
+			
 
 		</div>
-		<h3>where table</h3>
-		{% include "/snippets/table1.html" %}
+		{% include "analyser/snippets/table.html" with color="rgba(255, 66, 111, 1)" n=1 Data=api.Data.1 name=api.name.1 %} 
 	</div>
 
 
@@ -109,9 +108,9 @@
 		<div class="info">
 			<p>Volatility for chosen time : {{api.volatility.2.0}}</p>
 			<p>Mean close price: {{api.volatility.2.1}}</p>
-			<img src="../../assets/fig2">
+			
 		</div>
-		{% include "/snippets/table1.html" %}
+		{% include "analyser/snippets/table.html" with color='rgba(255, 206, 86, 1)' n=2 Data=api.Data.2 name=api.name.2 %} 
 	</div>
 
 </div>

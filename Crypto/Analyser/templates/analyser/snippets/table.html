@@ -1,0 +1,27 @@
+<canvas id="myChart{{n}}" width="250" height="300"></canvas>
+<script>
+var ctx = document.getElementById('myChart{{n}}').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [
+				{% for item in api.label %}
+					"{{ item }}",
+				{% endfor %}
+			],
+        datasets: [{
+			label: "{{name}} stock price",
+            data : [
+				{% for item in Data %}
+					"{{ item }}",
+				{% endfor %}
+	        ],
+            backgroundColor: 'rgba(0, 181, 190, 0.11)',
+            borderColor: '{{color}}',
+            borderWidth: 2,
+            fill: true
+        }]
+    },
+    
+});
+</script>
