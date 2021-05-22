@@ -63,4 +63,4 @@ class Analysis():
 		df: data frame object
 		_number: name by which the produced png file will be saved as 
 		"""
-		mpf.plot(data, type="candle", volume=True, tight_layout=True, figratio = (20,12), title="Current Stock Price"
+		mpf.plot(data, type="candle", volume=True, tight_layout=True, figratio = (20,12), title="Current Stock Price")
