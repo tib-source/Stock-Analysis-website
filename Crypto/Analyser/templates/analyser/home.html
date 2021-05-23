@@ -39,9 +39,6 @@
 	  grid-template-columns: repeat(3, 1fr);
 	  grid-auto-rows: minmax(200px, auto);
 	}
-	.info{
-		border: solid 1px black;
-	}
 	h3{
 		text-align: center;
 	}
@@ -84,7 +81,7 @@
 	<div class="splittable">
 		<h3>{{symbol_1.name}}</h3>
 
-		<div class="info">
+		<div class="border border-5 border-dark">
 			{% include "analyser/snippets/stock_info.html" with  Data=symbol_1%} 
 		</div>
 		{% include "analyser/snippets/table.html" with color='rgba(54, 162, 235, 1)' n=0  Data=symbol_1 name_=symbol_1.name	 %} 
@@ -94,7 +91,7 @@
 	<!-- second row  -->
 	<div class="splittable">
 		<h3>{{symbol_2.name}}</h3>
-		<div class="info">
+		<div class="border border-5 border-dark">
 			<!-- TODO: Make a snippet for the info section of the website. -->
 			<!-- TODO: Possibly change the code so that each ticker gets its own object instead of a one for all like now  -->
 			<!-- TODO: Finish the code below to include all the specific variables -->
@@ -108,7 +105,7 @@
 	<div class="splittable">
 		<h3>{{symbol_3.name}}</h3>
 
-		<div class="info">
+		<div class="border border-5 border-dark">
 			{% include "analyser/snippets/stock_info.html" with Data=symbol_3 %} 		
 		</div>
 		{% include "analyser/snippets/table.html" with color='rgba(255, 206, 86, 1)' n=2 Data=symbol_3 name_=symbol_3.name %} 

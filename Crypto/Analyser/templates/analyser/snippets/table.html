@@ -10,7 +10,7 @@ var myChart = new Chart(ctx, {
 				{% endfor %}
 			],
         datasets: [{
-			label: "{{name}} stock price",
+			label: "{{name_}} stock price",
             data : [
 				{% for item in Data.Data %}
 					"{{ item }}",

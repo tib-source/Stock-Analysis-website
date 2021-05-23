@@ -15,10 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
 from Analyser.views import home_view
+from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", home_view, name="home"),
     path("api/data", home_view, name="home"),
 ]
+
+
+if settings.DEBUG: # if application is in developement/debug mode
+    import debug_toolbar
+    urlpatterns += path("__debug__/", include(debug_toolbar.urls)),
+
+

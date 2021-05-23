@@ -44,11 +44,7 @@ class Analysis():
 		return df.to_dict()
 
 	def get_name(self,ticker) -> str:
-		URL  = "https://uk.finance.yahoo.com/quote/{}/options?p={}"
-		response = requests.get(URL.format(ticker,ticker), timeout=5)
-		soup = BeautifulSoup(response.text, "html.parser")
-		response.close()
-		return soup.find("h1",class_="D(ib) Fz(18px)").text
+		return ticker
 
 	def graph(sefl,df):
 		style.use("ggplot")
