@@ -5,14 +5,14 @@ var myChart = new Chart(ctx, {
     type: 'line',
     data: {
         labels: [
-				{% for item in api.label %}
+				{% for item in Data.label %}
 					"{{ item }}",
 				{% endfor %}
 			],
         datasets: [{
 			label: "{{name}} stock price",
             data : [
-				{% for item in Data %}
+				{% for item in Data.Data %}
 					"{{ item }}",
 				{% endfor %}
 	        ],

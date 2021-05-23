@@ -21,13 +21,11 @@ def home_view(request):
 	if request.POST:
 		form = CryptoForm(request.POST)
 		if form.is_valid():
-			form.save()
-			crypto1 = form.cleaned_data.get("crypto1") 
-			crypto2 = form.cleaned_data.get("crypto2") 
-			crypto3 = form.cleaned_data.get("crypto3")
-			api =  Analysis([crypto1,crypto2,crypto3])
+			form.save()  
 			context = {
-				"api" : api
+				"symbol_1":Analysis(form.cleaned_data.get("crypto1")),
+				"symbol_2":Analysis(form.cleaned_data.get("crypto2")),
+				"symbol_3":Analysis(form.cleaned_data.get("crypto3"))
 				}
 		else:
 			context["form"] = form
