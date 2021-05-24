@@ -2,6 +2,9 @@
 
 {% block content%}
 <style type="text/css">
+	html{
+		scroll-behavior: smooth;
+	}
 	body{
 		background: #E3B07F;
 	}
@@ -44,17 +47,24 @@
 	}
 </style>
 
-
+<script>
+	$(document).ready(function(){
+    $( "button.btn" ).click(function( event ) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 500);
+    });
+})
+</script>
 
 
 <h1 >Crypto Analysis</h1>
-<p class="text-center"> Write the tickers of three companies you want to analyse </p>
+<p class="text-center" id="#information"> Write the tickers of three companies you want to analyse </p>
 <form method="POST">
 	{% csrf_token %}
 <div class="container">
   <div class="row">
     <div class="col-sm " id>
-	<input type="text" name="crypto1" placeholder="Ticker-Name">
+	<input id="input" type="text" name="crypto1" placeholder="Ticker-Name">
     </div>
     <div class="col-sm" >
 	<input type="text" name="crypto2" placeholder="Ticker-Name">
@@ -63,7 +73,7 @@
 	<input type="text" name="crypto3" placeholder="Ticker-Name">
     </div>
   </div>
-    <button id="meow" type="submit" class="btn btn-primary">Analyse</button>
+    <button id="meow" type="submit" class="btn btn-primary" onclick="#input"> Analyse </button>
 </div>
 </form>
 
@@ -81,7 +91,7 @@
 	<div class="splittable">
 		<h3>{{symbol_1.name}}</h3>
 
-		<div class="border border-5 border-dark">
+		<div class="border border-dark">
 			{% include "analyser/snippets/stock_info.html" with  Data=symbol_1%} 
 		</div>
 		{% include "analyser/snippets/table.html" with color='rgba(54, 162, 235, 1)' n=0  Data=symbol_1 name_=symbol_1.name	 %} 
@@ -90,8 +100,8 @@
 
 	<!-- second row  -->
 	<div class="splittable">
-		<h3>{{symbol_2.name}}</h3>
-		<div class="border border-5 border-dark">
+		<h3 id="Tit">{{symbol_2.name}}</h3>
+		<div class="border border-dark">
 			<!-- TODO: Make a snippet for the info section of the website. -->
 			<!-- TODO: Possibly change the code so that each ticker gets its own object instead of a one for all like now  -->
 			<!-- TODO: Finish the code below to include all the specific variables -->
@@ -105,7 +115,7 @@
 	<div class="splittable">
 		<h3>{{symbol_3.name}}</h3>
 
-		<div class="border border-5 border-dark">
+		<div class="border border-dark">
 			{% include "analyser/snippets/stock_info.html" with Data=symbol_3 %} 		
 		</div>
 		{% include "analyser/snippets/table.html" with color='rgba(255, 206, 86, 1)' n=2 Data=symbol_3 name_=symbol_3.name %} 

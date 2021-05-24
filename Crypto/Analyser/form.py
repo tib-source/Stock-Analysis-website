@@ -12,6 +12,6 @@ class CryptoForm(forms.ModelForm):
 
 	def clean(self):
 		if not self.is_valid():
-			raise forms.ValidationError("Invalid Ticket/s")
+			raise forms.ValidationError("Invalid Ticker/s")
 
 

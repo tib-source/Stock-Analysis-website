@@ -1,15 +1,7 @@
 from django.shortcuts import render
-import requests
-import yfinance as yf
 from .form import CryptoForm
-from bs4 import BeautifulSoup
-import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib import style
-from Crypto.settings import BASE_DIR
-from django.views.generic import View
 from .services import Analysis
-from django.http import JsonResponse
+import threading
 # Create your views here.
 
 
@@ -21,12 +13,17 @@ def home_view(request):
 	if request.POST:
 		form = CryptoForm(request.POST)
 		if form.is_valid():
-			form.save()  
-			context = {
-				"symbol_1":Analysis(form.cleaned_data.get("crypto1")),
-				"symbol_2":Analysis(form.cleaned_data.get("crypto2")),
-				"symbol_3":Analysis(form.cleaned_data.get("crypto3"))
-				}
+			def create(data, name_):
+				context[name_] = Analysis(data)
+				pass
+			threads = list()
+			for x in range(1,4):
+				th = threading.Thread(target=create, args=(form.cleaned_data.get(f"crypto{x}"), f"symbol_{x}"))
+				threads.append(th)
+				th.start()
+			for t in threads:
+				t.join()
+
 		else:
 			context["form"] = form
 	else:
