@@ -40,10 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', #static files 
     #debug
     'debug_toolbar',
 ]
+
+STATIC_URL = '/Analyser/static/' 
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

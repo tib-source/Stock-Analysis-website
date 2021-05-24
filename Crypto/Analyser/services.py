@@ -1,3 +1,4 @@
+import json
 from pandas.core.frame import DataFrame
 import requests
 import pandas as pd
@@ -14,14 +15,15 @@ class Analysis():
 		self.volatility = self.volat(self.historical)
 		self.Data		= self.historical["Adj Close"]
 		self.infor = dict()
-		self.name 		= self.ticker
+		self.info(self.ticker)
+		self.name 		= self.infor["Name"]
 		self.Mean		= " "
 		self.Pchange	= " "
 		self.Volume		= " "
-		self.Market		= " "
+		self.Market		= f'{int(self.infor["MarketCapitalization"]):,}'
 		self.Quarter	= " "
 		self.NetIncome	= " "
-		self.Pe			= " "
+		self.Pe			= self.infor["PERatio"]
 		#self.graphs 	= list(map(self.graph , self.historical))
 
 	def __str__(self) -> str:
@@ -41,13 +43,10 @@ class Analysis():
 		df= pd.read_csv(file, sep=",")
 		return df
 
-	def dicticy(self,df):
-		""" Changes the data frame into a html table and allows for customisation"""
-		return df.to_dict()
-
-	def info(self,ticker) -> dict:
-		api key - UBTMO250R39WSJEW 
-		
+	def info(self,ticker,function="OVERVIEW",api="5SIWA2DDI2ZPTICC") -> dict:
+		url = f"https://www.alphavantage.co/query?function={function}&symbol={ticker}&apikey={api}"
+		response = requests.get(url)
+		self.infor = json.loads(response.text)
 		pass
 
 	def volat(sefl,df) -> list:
@@ -55,4 +54,4 @@ class Analysis():
 		mean = (sum(data))/len(data)
 		x = [(x-mean)**2 for x in data]
 		standard_deviation=  ((sum(x))/len(data))**0.5
-		return [round(standard_deviation, 1),mean]
+		return [round(standard_deviation, 1),round(mean,1)]

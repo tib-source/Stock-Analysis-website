@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content%}
+
+{% load static %}
 <style type="text/css">
+	body{
+		background-image: url("{%static '/analyser/images/RainbowDesktopBackground2.png'%}");
+		background-size: 1920px 1080px;
+		background-repeat: no-repeat;
+		background-position: top;
+		background-attachment: fixed;
+	}
 	html{
 		scroll-behavior: smooth;
-	}
-	body{
-		background-image:url("../../assets/RainbowDesktopBackground2.png");
 	}
 	.row{
 		width:700px;
@@ -43,6 +49,9 @@
 	}
 	.cne{
 		text-align: center;
+	}
+	.table{
+		background: rgba(255, 245, 235, 0.21) ;
 	}
 </style>
 
@@ -90,7 +99,7 @@
 	<div class="splittable">
 		
 
-		<div class="border border-dark">
+		<div class="border border-bottom-0">
 			{% include "analyser/snippets/stock_info.html" with  Data=symbol_1%} 
 		</div>
 		{% include "analyser/snippets/table.html" with color='rgba(54, 162, 235, 1)' n=0  Data=symbol_1 name_=symbol_1.name	 %} 
@@ -100,7 +109,7 @@
 	<!-- second row  -->
 	<div class="splittable">
 		
-		<div class="border border-dark">
+		<div class="border border-bottom-0">
 			<!-- TODO: Make a snippet for the info section of the website. -->
 			<!-- TODO: Possibly change the code so that each ticker gets its own object instead of a one for all like now  -->
 			<!-- TODO: Finish the code below to include all the specific variables -->
@@ -114,7 +123,7 @@
 	<div class="splittable">
 
 
-		<div class="border border-dark">
+		<div class="border border-bottom-0">
 			{% include "analyser/snippets/stock_info.html" with Data=symbol_3 %} 		
 		</div>
 		{% include "analyser/snippets/table.html" with color='rgba(255, 206, 86, 1)' n=2 Data=symbol_3 name_=symbol_3.name %} 
