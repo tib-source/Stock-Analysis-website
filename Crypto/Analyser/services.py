@@ -1,21 +1,27 @@
 from pandas.core.frame import DataFrame
 import requests
-from bs4 import BeautifulSoup
 import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib import style
+import yfinance as yf
 
 
 
 class Analysis():
-	def __init__(self, ticker ):
-		""" takes in a form object from the home page and does some analysis lol"""
+	def __init__(self, ticker: str ):
+		""" takes in a str ticker from the home page and does some analysis lol"""
 		self.ticker		= ticker
 		self.historical	= self.get_historical(ticker)
 		self.label 		= self.historical["Date"]
 		self.volatility = self.volat(self.historical)
 		self.Data		= self.historical["Adj Close"]
-		self.name 		= self.get_name(self.ticker)
+		self.infor = dict()
+		self.name 		= self.ticker
+		self.Mean		= " "
+		self.Pchange	= " "
+		self.Volume		= " "
+		self.Market		= " "
+		self.Quarter	= " "
+		self.NetIncome	= " "
+		self.Pe			= " "
 		#self.graphs 	= list(map(self.graph , self.historical))
 
 	def __str__(self) -> str:
@@ -39,11 +45,10 @@ class Analysis():
 		""" Changes the data frame into a html table and allows for customisation"""
 		return df.to_dict()
 
-	def get_name(self,ticker) -> str:
-		stock_company = f"https://finance.yahoo.com/quote/{ticker}"
-		soup = BeautifulSoup(requests.get(stock_company).text, "html.parser")
-		name = soup.h1.text.split('-')[0].strip()
-		return name
+	def info(self,ticker) -> dict:
+		api key - UBTMO250R39WSJEW 
+		
+		pass
 
 	def volat(sefl,df) -> list:
 		data = df["Adj Close"]
