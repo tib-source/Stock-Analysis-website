@@ -6,7 +6,7 @@
 		scroll-behavior: smooth;
 	}
 	body{
-		background: #E3B07F;
+		background-image:url("../../assets/RainbowDesktopBackground2.png");
 	}
 	.row{
 		width:700px;
@@ -19,15 +19,14 @@
 		text-align: center; 
 		}
 	#meow{
-		border: 1px solid;
 		margin-top:10px;
 		margin-bottom: 30px;	
 		margin-left:45%;
 	}
-	p{
+	.cne1{
 		font-size: 15px;
 		margin-top: 4px;
-		margin-left: 15px;
+		margin-left: 0;
 	}
 	body {
 	  margin: 0;
@@ -42,7 +41,7 @@
 	  grid-template-columns: repeat(3, 1fr);
 	  grid-auto-rows: minmax(200px, auto);
 	}
-	h3{
+	.cne{
 		text-align: center;
 	}
 </style>
@@ -89,7 +88,7 @@
 <div id="wrapper">
 	<!-- first row of the screen	 -->
 	<div class="splittable">
-		<h3>{{symbol_1.name}}</h3>
+		
 
 		<div class="border border-dark">
 			{% include "analyser/snippets/stock_info.html" with  Data=symbol_1%} 
@@ -100,7 +99,7 @@
 
 	<!-- second row  -->
 	<div class="splittable">
-		<h3 id="Tit">{{symbol_2.name}}</h3>
+		
 		<div class="border border-dark">
 			<!-- TODO: Make a snippet for the info section of the website. -->
 			<!-- TODO: Possibly change the code so that each ticker gets its own object instead of a one for all like now  -->
@@ -113,7 +112,7 @@
 
 	<!-- third row -->
 	<div class="splittable">
-		<h3>{{symbol_3.name}}</h3>
+
 
 		<div class="border border-dark">
 			{% include "analyser/snippets/stock_info.html" with Data=symbol_3 %} 		
