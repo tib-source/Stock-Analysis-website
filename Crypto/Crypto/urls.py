@@ -22,7 +22,7 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", home_view, name="home"),
-    path("api/data", home_view, name="home"),
+    path("api/data", home_view, name="api"),
 ]
 
 
